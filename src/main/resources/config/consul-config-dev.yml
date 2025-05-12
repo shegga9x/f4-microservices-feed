@@ -8,7 +8,7 @@ ssh:
   forwarding:
     enabled: true # Set to true to enable SSH port forwarding
   remote:
-    host: appf4.io.vn
+    host: appf4s.io.vn
   user: root
   password: ledinhde788De
   service-name: feed
@@ -32,7 +32,7 @@ spring:
         enabled: true
         service-name: feed
         prefer-ip-address: true
-        ip-address: appf4.io.vn
+        ip-address: appf4s.io.vn
         port: ${ssh.remote.port}
         acl-token: ${CONSUL_HTTP_TOKEN:}
       config:
@@ -55,7 +55,7 @@ spring:
           contentType: application/json
       kafka:
         binder:
-          brokers: appf4.io.vn:9092
+          brokers: appf4s.io.vn:9092
           auto-create-topics: true
           configuration:
             security.protocol: SSL
@@ -105,7 +105,7 @@ spring:
   liquibase:
     url: jdbc:mysql://microservices.appf4.io.vn:${ssh.mysql_port}/${ssh.mysql_database}?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
   kafka:
-    bootstrap-servers: appf4.io.vn:9092
+    bootstrap-servers: appf4s.io.vn:9092
     security-protocol: SSL
     ssl:
       endpoint-identification-algorithm: ""
