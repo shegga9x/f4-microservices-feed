@@ -48,11 +48,32 @@ spring:
       bindings:
         kafkaConsumer-in-0:
           destination: ${ssh.service-name}-input
-          contentType: application/json
+          contentType: application/avro
           group: ${ssh.service-name}
+          consumer:
+            autoCommitOffset: true
+            startOffset: latest
+            enableDlq: false
+            maxAttempts: 3
+            backOffInitialInterval: 1000
+            backOffMaxInterval: 10000
+            backOffMultiplier: 2.0
+            defaultRetryable: true
+            retryableExceptions:
+              org.springframework.kafka.KafkaException: true
+              org.springframework.messaging.MessagingException: true
+              com.fasterxml.jackson.databind.exc.InvalidFormatException: true
+            partitioned: true
+            instanceCount: 3
+            concurrency: 1
         kafkaProducer-out-0:
-          destination: ${ssh.service-name}-output
-          contentType: application/json
+          destination: ${ssh.service-name}-input
+          contentType: application/avro
+          producer:
+            useNativeEncoding: true
+            sync: false
+            bufferSize: 16384
+            errorChannelEnabled: true
       kafka:
         binder:
           brokers: appf4.io.vn:9092
@@ -65,16 +86,17 @@ spring:
             ssl.keystore.location: classpath:config/tls/kafka.keystore.jks
             ssl.keystore.password: f4security
             ssl.key.password: f4security
-        bindings:
-          kafkaConsumer-in-0:
-            consumer:
-              autoCommitOffset: true
-              startOffset: latest
-              enableDlq: true
-          kafkaProducer-out-0:
-            producer:
-              sync: false
-              bufferSize: 16384
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            schema.registry.url: http://appf4.io.vn:8081
+          consumer-properties:
+            key.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+            value.deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+            spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+            spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            schema.registry.url: http://appf4.io.vn:8081
+            specific.avro.reader: true
       # Configure task scheduler for graceful shutdown
       task:
         scheduler:
