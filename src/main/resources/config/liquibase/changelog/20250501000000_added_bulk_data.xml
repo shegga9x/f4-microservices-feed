@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!-- Step 1: Create temp tables -->
+    <changeSet id="202506190001-1" author="jhipster">
+        <comment>Create temp_feed_ids table</comment>
+        <sql>
+            CREATE TABLE IF NOT EXISTS temp_feed_ids (
+                id VARCHAR(36)
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="202506190001-1a" author="jhipster">
+        <comment>Create temp_user_ids table</comment>
+        <sql>
+            CREATE TABLE IF NOT EXISTS temp_user_ids (
+                id VARCHAR(36)
+            );
+        </sql>
+    </changeSet>
+    <!-- Step 2: Load data into temp tables -->
+    <changeSet id="202506190001-2" author="jhipster">
+        <comment>Load feed IDs</comment>
+        <sql>
+            LOAD DATA LOCAL INFILE '../data/feed_ids.csv'
+            INTO TABLE temp_feed_ids
+            FIELDS TERMINATED BY ','
+            LINES TERMINATED BY '\n'
+            IGNORE 1 ROWS
+            (id);
+        </sql>
+    </changeSet>
+    <changeSet id="202506190001-2a" author="jhipster">
+        <comment>Load user IDs</comment>
+        <sql>
+            LOAD DATA LOCAL INFILE '../data/user_ids.csv'
+            INTO TABLE temp_user_ids
+            FIELDS TERMINATED BY ','
+            LINES TERMINATED BY '\n'
+            IGNORE 1 ROWS
+            (id);
+        </sql>
+    </changeSet>
+    <changeSet id="202506200005-insert-feeds" author="jhipster">
+        <sql>
+        -- Initialize row numbers
+        SET @feed_rn := 0;
+        SET @user_rn := 0;
+
+        -- Create indexed temp tables
+        CREATE TEMPORARY TABLE indexed_feeds AS
+        SELECT id AS feed_id, (@feed_rn := @feed_rn + 1) AS rn
+        FROM temp_feed_ids;
+
+        CREATE TEMPORARY TABLE indexed_users AS
+        SELECT id AS user_id, (@user_rn := @user_rn + 1) AS rn
+        FROM temp_user_ids;
+
+        -- Get total number of users for round-robin assignment
+        SELECT COUNT(*) INTO @total_users FROM indexed_users;
+
+        -- Insert feeds with round-robin assigned users
+        INSERT INTO feed_item (id, user_id, reel_id, timestamp)
+        SELECT
+            r.feed_id,
+            (SELECT user_id FROM indexed_users u WHERE u.rn = ((r.rn - 1) % @total_users) + 1),
+            UUID(),           -- generate random reel_id (or use fixed/test one)
+            DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 60 * 24 * 30) MINUTE) AS timestamp
+        FROM indexed_feeds r
+        LIMIT 500000;
+        </sql>
+    </changeSet>
+    <!-- Step 5: Drop temp tables -->
+    <changeSet id="202506190001-4" author="jhipster">
+        <comment>Drop temporary tables</comment>
+        <sql>
+            DROP TABLE IF EXISTS temp_feed_ids; 
+            DROP TABLE IF EXISTS temp_user_ids;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

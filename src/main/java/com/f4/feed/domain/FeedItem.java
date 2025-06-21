@@ -15,7 +15,7 @@ import org.hibernate.type.SqlTypes;
  */
 @Entity
 @Table(name = "feed_item")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "feeditem")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class FeedItem implements Serializable {
