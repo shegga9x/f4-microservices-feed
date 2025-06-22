@@ -398,11 +398,10 @@
             <artifactId>spring-cloud-schema-registry-client</artifactId>
             <version>1.1.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
-            <version>3.50.0</version>
+            <version>3.23.5</version>
         </dependency>
         <!-- Redisson JCache Integration -->
         <!-- Hibernate JCache -->
@@ -773,7 +772,8 @@
                                 <arg>/entrypoint.sh</arg>
                             </entrypoint>
                             <ports>
-                                <port>8084</port>
+                                <port>8082</port>
+                                <port>5701/udp</port>
                             </ports>
                             <environment>
                                 <SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
@@ -1143,7 +1143,7 @@
             <properties>
                 <!-- default Spring profiles -->
                 <liquibase-plugin.password/>
-                <liquibase-plugin.url>jdbc:mysql://microservices.appf4.io.vn:3384/feed</liquibase-plugin.url>
+                <liquibase-plugin.url>jdbc:mysql://microservices.appf4.io.vn:3384/feed?allowLoadLocalInfile=true</liquibase-plugin.url>
                 <liquibase-plugin.username>root</liquibase-plugin.username>
                 <profile.test>test,testprod</profile.test>
                 <spring.profiles.active>prod${profile.api-docs}${profile.tls}${profile.e2e}${profile.no-liquibase}</spring.profiles.active>
