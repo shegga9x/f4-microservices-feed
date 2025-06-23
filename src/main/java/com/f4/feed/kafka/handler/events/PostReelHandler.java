@@ -3,14 +3,14 @@ package com.f4.feed.kafka.handler.events;
 import org.springframework.stereotype.Component;
 
 import com.f4.feed.kafka.handler.EventHandler;
-import com.f4.feed.service.ReelService;
-import com.f4.feed.service.dto.ReelDTO;
+import com.f4.feed.service.FeedItemService;
+import com.f4.feed.service.dto.FeedItemDTO;
 
 @Component
-public class PostReelHandler implements EventHandler<ReelDTO> {
-    private final ReelService svc;
+public class PostReelHandler implements EventHandler<FeedItemDTO> {
+    private final FeedItemService svc;
 
-    public PostReelHandler(ReelService svc) {
+    public PostReelHandler(FeedItemService svc) {
         this.svc = svc;
     }
 
@@ -18,7 +18,7 @@ public class PostReelHandler implements EventHandler<ReelDTO> {
         return "postReel";
     }
 
-    public void handle(ReelDTO dto) {
+    public void handle(FeedItemDTO dto) {
         svc.save(dto);
     }
 }
