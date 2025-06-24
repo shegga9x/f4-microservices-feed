@@ -26,46 +26,41 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * UserDTO
+ * LikeDTO
  */
 @JsonPropertyOrder({
-  UserDTO.JSON_PROPERTY_ID,
-  UserDTO.JSON_PROPERTY_USERNAME,
-  UserDTO.JSON_PROPERTY_EMAIL,
-  UserDTO.JSON_PROPERTY_PASSWORD_HASH,
-  UserDTO.JSON_PROPERTY_CREATED_AT,
-  UserDTO.JSON_PROPERTY_KEYCLOAK_USER_ID
+  LikeDTO.JSON_PROPERTY_ID,
+  LikeDTO.JSON_PROPERTY_PARENT_TYPE,
+  LikeDTO.JSON_PROPERTY_PARENT_ID,
+  LikeDTO.JSON_PROPERTY_USER_ID,
+  LikeDTO.JSON_PROPERTY_CREATED_AT
 })
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-06-24T10:08:24.663346251+07:00[Asia/Ho_Chi_Minh]", comments = "Generator version: 7.13.0")
-public class UserDTO {
+public class LikeDTO {
   public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nonnull
   private UUID id;
 
-  public static final String JSON_PROPERTY_USERNAME = "username";
+  public static final String JSON_PROPERTY_PARENT_TYPE = "parentType";
   @javax.annotation.Nonnull
-  private String username;
+  private String parentType;
 
-  public static final String JSON_PROPERTY_EMAIL = "email";
+  public static final String JSON_PROPERTY_PARENT_ID = "parentId";
   @javax.annotation.Nonnull
-  private String email;
+  private UUID parentId;
 
-  public static final String JSON_PROPERTY_PASSWORD_HASH = "passwordHash";
+  public static final String JSON_PROPERTY_USER_ID = "userId";
   @javax.annotation.Nonnull
-  private String passwordHash;
+  private UUID userId;
 
   public static final String JSON_PROPERTY_CREATED_AT = "createdAt";
   @javax.annotation.Nonnull
   private OffsetDateTime createdAt;
 
-  public static final String JSON_PROPERTY_KEYCLOAK_USER_ID = "keycloakUserId";
-  @javax.annotation.Nonnull
-  private UUID keycloakUserId;
-
-  public UserDTO() {
+  public LikeDTO() {
   }
 
-  public UserDTO id(@javax.annotation.Nonnull UUID id) {
+  public LikeDTO id(@javax.annotation.Nonnull UUID id) {
     
     this.id = id;
     return this;
@@ -91,85 +86,85 @@ public class UserDTO {
   }
 
 
-  public UserDTO username(@javax.annotation.Nonnull String username) {
+  public LikeDTO parentType(@javax.annotation.Nonnull String parentType) {
     
-    this.username = username;
+    this.parentType = parentType;
     return this;
   }
 
   /**
-   * Get username
-   * @return username
+   * Get parentType
+   * @return parentType
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_USERNAME)
+  @JsonProperty(JSON_PROPERTY_PARENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getUsername() {
-    return username;
+  public String getParentType() {
+    return parentType;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_USERNAME)
+  @JsonProperty(JSON_PROPERTY_PARENT_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setUsername(@javax.annotation.Nonnull String username) {
-    this.username = username;
+  public void setParentType(@javax.annotation.Nonnull String parentType) {
+    this.parentType = parentType;
   }
 
 
-  public UserDTO email(@javax.annotation.Nonnull String email) {
+  public LikeDTO parentId(@javax.annotation.Nonnull UUID parentId) {
     
-    this.email = email;
+    this.parentId = parentId;
     return this;
   }
 
   /**
-   * Get email
-   * @return email
+   * Get parentId
+   * @return parentId
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_EMAIL)
+  @JsonProperty(JSON_PROPERTY_PARENT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getEmail() {
-    return email;
+  public UUID getParentId() {
+    return parentId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_EMAIL)
+  @JsonProperty(JSON_PROPERTY_PARENT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setEmail(@javax.annotation.Nonnull String email) {
-    this.email = email;
+  public void setParentId(@javax.annotation.Nonnull UUID parentId) {
+    this.parentId = parentId;
   }
 
 
-  public UserDTO passwordHash(@javax.annotation.Nonnull String passwordHash) {
+  public LikeDTO userId(@javax.annotation.Nonnull UUID userId) {
     
-    this.passwordHash = passwordHash;
+    this.userId = userId;
     return this;
   }
 
   /**
-   * Get passwordHash
-   * @return passwordHash
+   * Get userId
+   * @return userId
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_PASSWORD_HASH)
+  @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getPasswordHash() {
-    return passwordHash;
+  public UUID getUserId() {
+    return userId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PASSWORD_HASH)
+  @JsonProperty(JSON_PROPERTY_USER_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPasswordHash(@javax.annotation.Nonnull String passwordHash) {
-    this.passwordHash = passwordHash;
+  public void setUserId(@javax.annotation.Nonnull UUID userId) {
+    this.userId = userId;
   }
 
 
-  public UserDTO createdAt(@javax.annotation.Nonnull OffsetDateTime createdAt) {
+  public LikeDTO createdAt(@javax.annotation.Nonnull OffsetDateTime createdAt) {
     
     this.createdAt = createdAt;
     return this;
@@ -195,32 +190,6 @@ public class UserDTO {
   }
 
 
-  public UserDTO keycloakUserId(@javax.annotation.Nonnull UUID keycloakUserId) {
-    
-    this.keycloakUserId = keycloakUserId;
-    return this;
-  }
-
-  /**
-   * Get keycloakUserId
-   * @return keycloakUserId
-   */
-  @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_KEYCLOAK_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public UUID getKeycloakUserId() {
-    return keycloakUserId;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_KEYCLOAK_USER_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setKeycloakUserId(@javax.annotation.Nonnull UUID keycloakUserId) {
-    this.keycloakUserId = keycloakUserId;
-  }
-
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -229,30 +198,28 @@ public class UserDTO {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    UserDTO userDTO = (UserDTO) o;
-    return Objects.equals(this.id, userDTO.id) &&
-        Objects.equals(this.username, userDTO.username) &&
-        Objects.equals(this.email, userDTO.email) &&
-        Objects.equals(this.passwordHash, userDTO.passwordHash) &&
-        Objects.equals(this.createdAt, userDTO.createdAt) &&
-        Objects.equals(this.keycloakUserId, userDTO.keycloakUserId);
+    LikeDTO likeDTO = (LikeDTO) o;
+    return Objects.equals(this.id, likeDTO.id) &&
+        Objects.equals(this.parentType, likeDTO.parentType) &&
+        Objects.equals(this.parentId, likeDTO.parentId) &&
+        Objects.equals(this.userId, likeDTO.userId) &&
+        Objects.equals(this.createdAt, likeDTO.createdAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, email, passwordHash, createdAt, keycloakUserId);
+    return Objects.hash(id, parentType, parentId, userId, createdAt);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class UserDTO {\n");
+    sb.append("class LikeDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    passwordHash: ").append(toIndentedString(passwordHash)).append("\n");
+    sb.append("    parentType: ").append(toIndentedString(parentType)).append("\n");
+    sb.append("    parentId: ").append(toIndentedString(parentId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    keycloakUserId: ").append(toIndentedString(keycloakUserId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
