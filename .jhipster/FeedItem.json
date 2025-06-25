@@ -43,10 +43,6 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "commentsCount",
-      "fieldType": "Integer"
-    },
-    {
       "fieldName": "sharesCount",
       "fieldType": "Integer"
     },
