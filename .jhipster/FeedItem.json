@@ -39,6 +39,18 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "likesCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "commentsCount",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "sharesCount",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "createdAt",
       "fieldType": "Instant",
       "fieldValidateRules": ["required"]

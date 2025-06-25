@@ -10,14 +10,15 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
+/**
+ * A FeedItem.
+ */
 @Entity
 @Table(name = "feed_item")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Document(indexName = "feeditem")
+@org.springframework.data.elasticsearch.annotations.Document(indexName = "feeditem")
+@SuppressWarnings("common-java:DuplicatedBlocks")
 public class FeedItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,25 +37,37 @@ public class FeedItem implements Serializable {
 
     @Lob
     @Column(name = "content")
-    @Field(type = FieldType.Text)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String content;
 
     @Column(name = "image_url")
-    @Field(type = FieldType.Text)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String imageUrl;
 
     @Column(name = "video_url")
-    @Field(type = FieldType.Text)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String videoUrl;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "visibility")
-    @Field(type = FieldType.Keyword)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Keyword)
     private FeedVisibility visibility;
 
     @Column(name = "location")
-    @Field(type = FieldType.Text)
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String location;
+
+    @Column(name = "likes_count")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
+    private Integer likesCount;
+
+    @Column(name = "comments_count")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
+    private Integer commentsCount;
+
+    @Column(name = "shares_count")
+    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
+    private Integer sharesCount;
 
     @NotNull
     @Column(name = "created_at", nullable = false)
@@ -64,10 +77,15 @@ public class FeedItem implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    // Getters and Setters
+    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public UUID getId() {
-        return id;
+        return this.id;
+    }
+
+    public FeedItem id(UUID id) {
+        this.setId(id);
+        return this;
     }
 
     public void setId(UUID id) {
@@ -75,7 +93,12 @@ public class FeedItem implements Serializable {
     }
 
     public UUID getUserId() {
-        return userId;
+        return this.userId;
+    }
+
+    public FeedItem userId(UUID userId) {
+        this.setUserId(userId);
+        return this;
     }
 
     public void setUserId(UUID userId) {
@@ -83,7 +106,12 @@ public class FeedItem implements Serializable {
     }
 
     public String getContent() {
-        return content;
+        return this.content;
+    }
+
+    public FeedItem content(String content) {
+        this.setContent(content);
+        return this;
     }
 
     public void setContent(String content) {
@@ -91,7 +119,12 @@ public class FeedItem implements Serializable {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return this.imageUrl;
+    }
+
+    public FeedItem imageUrl(String imageUrl) {
+        this.setImageUrl(imageUrl);
+        return this;
     }
 
     public void setImageUrl(String imageUrl) {
@@ -99,7 +132,12 @@ public class FeedItem implements Serializable {
     }
 
     public String getVideoUrl() {
-        return videoUrl;
+        return this.videoUrl;
+    }
+
+    public FeedItem videoUrl(String videoUrl) {
+        this.setVideoUrl(videoUrl);
+        return this;
     }
 
     public void setVideoUrl(String videoUrl) {
@@ -107,7 +145,12 @@ public class FeedItem implements Serializable {
     }
 
     public FeedVisibility getVisibility() {
-        return visibility;
+        return this.visibility;
+    }
+
+    public FeedItem visibility(FeedVisibility visibility) {
+        this.setVisibility(visibility);
+        return this;
     }
 
     public void setVisibility(FeedVisibility visibility) {
@@ -115,15 +158,64 @@ public class FeedItem implements Serializable {
     }
 
     public String getLocation() {
-        return location;
+        return this.location;
+    }
+
+    public FeedItem location(String location) {
+        this.setLocation(location);
+        return this;
     }
 
     public void setLocation(String location) {
         this.location = location;
     }
 
+    public Integer getLikesCount() {
+        return this.likesCount;
+    }
+
+    public FeedItem likesCount(Integer likesCount) {
+        this.setLikesCount(likesCount);
+        return this;
+    }
+
+    public void setLikesCount(Integer likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public Integer getCommentsCount() {
+        return this.commentsCount;
+    }
+
+    public FeedItem commentsCount(Integer commentsCount) {
+        this.setCommentsCount(commentsCount);
+        return this;
+    }
+
+    public void setCommentsCount(Integer commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
+    public Integer getSharesCount() {
+        return this.sharesCount;
+    }
+
+    public FeedItem sharesCount(Integer sharesCount) {
+        this.setSharesCount(sharesCount);
+        return this;
+    }
+
+    public void setSharesCount(Integer sharesCount) {
+        this.sharesCount = sharesCount;
+    }
+
     public Instant getCreatedAt() {
-        return createdAt;
+        return this.createdAt;
+    }
+
+    public FeedItem createdAt(Instant createdAt) {
+        this.setCreatedAt(createdAt);
+        return this;
     }
 
     public void setCreatedAt(Instant createdAt) {
@@ -131,40 +223,53 @@ public class FeedItem implements Serializable {
     }
 
     public Instant getUpdatedAt() {
-        return updatedAt;
+        return this.updatedAt;
+    }
+
+    public FeedItem updatedAt(Instant updatedAt) {
+        this.setUpdatedAt(updatedAt);
+        return this;
     }
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof FeedItem))
+        }
+        if (!(o instanceof FeedItem)) {
             return false;
-        return id != null && id.equals(((FeedItem) o).id);
+        }
+        return getId() != null && getId().equals(((FeedItem) o).getId());
     }
 
     @Override
     public int hashCode() {
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "FeedItem{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", content='" + content + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", videoUrl='" + videoUrl + '\'' +
-                ", visibility=" + visibility +
-                ", location='" + location + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+            "id=" + getId() +
+            ", userId=" + getUserId() +
+            ", content='" + getContent() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
+            ", videoUrl='" + getVideoUrl() + "'" +
+            ", visibility=" + getVisibility() +
+            ", location='" + getLocation() + "'" +
+            ", likesCount=" + getLikesCount() +
+            ", commentsCount=" + getCommentsCount() +
+            ", sharesCount=" + getSharesCount() +
+            ", createdAt=" + getCreatedAt() +
+            ", updatedAt=" + getUpdatedAt() +
+            "}";
     }
-
 }

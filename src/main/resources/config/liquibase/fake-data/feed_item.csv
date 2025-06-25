@@ -1,11 +1,11 @@
-id;user_id;content;image_url;video_url;visibility;location;created_at;updated_at
-dfc64c6e-24da-4b38-96cd-57b9444098e3;aedaa38e-1215-4327-b41b-f4c925cdff76;../fake-data/blob/hipster.txt;gray;rarely split verbally;PRIVATE;arrange shaft;2025-04-21T21:53:17;2025-04-21T11:36:32
-54492de6-01a6-4e84-9743-a0c1216a5b3a;ac6bb3c4-9eb7-416d-9284-acb65d0cce85;../fake-data/blob/hipster.txt;cheetah punctually;irritably;PRIVATE;since fold;2025-04-21T09:03:51;2025-04-21T11:02:19
-fd739b79-af68-4a2a-baa0-45b5c558cc7a;93ac1f9e-ca89-4332-9124-96b2c966a720;../fake-data/blob/hipster.txt;readily boohoo doubter;squid;FRIENDS_ONLY;before that around;2025-04-21T19:15:38;2025-04-21T20:36:42
-577fcce1-02bb-495f-a44d-8cb101e9c92b;f3664b76-6f61-44c4-813f-4c08f266db7e;../fake-data/blob/hipster.txt;whoa;instead;PRIVATE;energetically per publication;2025-04-21T16:42:40;2025-04-22T03:57:48
-74d954e7-393e-427d-8d48-c4b3a2417db9;ae05b755-101a-4610-a7f6-253a0293765a;../fake-data/blob/hipster.txt;for overload;once;PUBLIC;incidentally apud keenly;2025-04-22T02:32:35;2025-04-22T01:34:07
-f9da0b29-ebda-4645-ba7e-e20c10d41bee;e7e68922-5212-4252-a11e-cccb4049bdec;../fake-data/blob/hipster.txt;ick yowza defensive;rudely;FRIENDS_ONLY;eyeglasses pish old-fashioned;2025-04-22T01:14:25;2025-04-22T04:54:42
-eb3fe38b-1343-466f-b73f-152b54d9ff5a;0d65b355-557f-4117-ad1a-5ab917aa267d;../fake-data/blob/hipster.txt;wetly via quit;scope zowie tune;FRIENDS_ONLY;whenever;2025-04-21T23:49:41;2025-04-21T22:32:01
-572c038f-f144-4ef4-b9e9-e7bf8e01e9f8;7a4362e1-386b-47ca-baa3-2cc0e3bdb894;../fake-data/blob/hipster.txt;when silently;thoughtfully fellow roughly;PUBLIC;minus eek brr;2025-04-21T14:06:25;2025-04-21T21:48:56
-3440f55f-b637-4009-aeea-1be920da4995;596afcac-0b91-43dc-b59f-17b22f26a102;../fake-data/blob/hipster.txt;overdue so;pine;PUBLIC;despite deployment overvalue;2025-04-22T02:41:47;2025-04-21T06:29:08
-d2e45710-3911-4dfd-898c-d5a3bc455389;a09e5983-204f-483b-8523-73b0f22887f8;../fake-data/blob/hipster.txt;arrange delectable upliftingly;break next;PRIVATE;righteously jell;2025-04-21T06:44:56;2025-04-21T18:01:22
+id;user_id;content;image_url;video_url;visibility;location;likes_count;comments_count;shares_count;created_at;updated_at
+dfc64c6e-24da-4b38-96cd-57b9444098e3;aedaa38e-1215-4327-b41b-f4c925cdff76;../fake-data/blob/hipster.txt;gray;rarely split verbally;PRIVATE;arrange shaft;22506;8471;11017;2025-04-21T12:00:30;2025-04-21T11:45:18
+92de601a-6e84-4743-9a0c-1216a5b3a6ac;bb3c49eb-716d-4284-aacb-65d0cce8559e;../fake-data/blob/hipster.txt;that;airman;PUBLIC;ack curry yin;27939;16246;7495;2025-04-21T19:17:11;2025-04-21T22:20:16
+79af68a2-aaa0-445b-b5c5-58cc7ac93ac1;9eca8933-2124-496b-a2c9-66a7207f8c9e;../fake-data/blob/hipster.txt;yowza;doubter;PUBLIC;than ick;8875;29044;30511;2025-04-21T13:39:47;2025-04-21T08:16:49
+18af420b-439a-4577-afcc-e102bb95f44d;cb101e9c-92ba-4f36-964b-766f614c413f;../fake-data/blob/hipster.txt;whereas reclassify quirkily;unit;FRIENDS_ONLY;how awareness;7744;32679;31387;2025-04-21T14:32:55;2025-04-21T22:38:01
+7f74d954-e739-43e2-a7dd-48c4b3a2417d;91ae05b7-5510-41a6-9107-f6253a029376;../fake-data/blob/hipster.txt;briskly nor;boldly react;PRIVATE;unexpectedly;10426;6249;19110;2025-04-21T16:18:04;2025-04-22T03:13:11
+df36edf9-da0b-429e-bbda-645a7ee20c10;41beece7-e689-4225-9212-25211ecccb40;../fake-data/blob/hipster.txt;electric who;sweatshop sedately wherever;FRIENDS_ONLY;but;11880;12622;10832;2025-04-22T02:57:36;2025-04-21T09:35:21
+e739cdd9-dfeb-43fe-838b-134366f73f15;b54d9ff5-ac0d-465b-a355-557f117d1a5a;../fake-data/blob/hipster.txt;mechanically quarterly;while once bah;PUBLIC;shakily;29777;17846;8834;2025-04-21T14:51:34;2025-04-21T10:43:21
+6bfe095f-c86c-4cb5-b72c-038ff144ef49;9e7bf8e0-1e9f-48d7-aa43-62e1386b7caa;../fake-data/blob/hipster.txt;recount;secondary er um;FRIENDS_ONLY;ew store;23631;27209;5492;2025-04-21T10:47:41;2025-04-21T21:51:05
+1f90fa8f-92f5-44f2-99fc-874255a3440f;5fb63700-9eea-41be-b920-da49959596af;../fake-data/blob/hipster.txt;upbeat redact;phooey;PUBLIC;sinful humiliating pish;23257;22061;1950;2025-04-22T03:29:04;2025-04-21T12:20:39
+198aa62d-1ffb-43a3-8a73-09e0d2e45710;911dfd98-cd5a-43bc-8455-3892a09e5983;../fake-data/blob/hipster.txt;courageously;amidst;PRIVATE;bank restfully;10043;25387;27326;2025-04-21T22:33:26;2025-04-21T09:42:34
