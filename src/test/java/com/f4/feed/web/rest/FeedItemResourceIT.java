@@ -65,6 +65,9 @@ class FeedItemResourceIT {
     private static final Integer DEFAULT_LIKES_COUNT = 1;
     private static final Integer UPDATED_LIKES_COUNT = 2;
 
+    private static final Integer DEFAULT_COMMENTS_COUNT = 1;
+    private static final Integer UPDATED_COMMENTS_COUNT = 2;
+
     private static final Integer DEFAULT_SHARES_COUNT = 1;
     private static final Integer UPDATED_SHARES_COUNT = 2;
 
@@ -115,6 +118,7 @@ class FeedItemResourceIT {
             .visibility(DEFAULT_VISIBILITY)
             .location(DEFAULT_LOCATION)
             .likesCount(DEFAULT_LIKES_COUNT)
+            .commentsCount(DEFAULT_COMMENTS_COUNT)
             .sharesCount(DEFAULT_SHARES_COUNT)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT);
@@ -135,6 +139,7 @@ class FeedItemResourceIT {
             .visibility(UPDATED_VISIBILITY)
             .location(UPDATED_LOCATION)
             .likesCount(UPDATED_LIKES_COUNT)
+            .commentsCount(UPDATED_COMMENTS_COUNT)
             .sharesCount(UPDATED_SHARES_COUNT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
@@ -291,6 +296,7 @@ class FeedItemResourceIT {
             .andExpect(jsonPath("$.[*].visibility").value(hasItem(DEFAULT_VISIBILITY.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].likesCount").value(hasItem(DEFAULT_LIKES_COUNT)))
+            .andExpect(jsonPath("$.[*].commentsCount").value(hasItem(DEFAULT_COMMENTS_COUNT)))
             .andExpect(jsonPath("$.[*].sharesCount").value(hasItem(DEFAULT_SHARES_COUNT)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
@@ -315,6 +321,7 @@ class FeedItemResourceIT {
             .andExpect(jsonPath("$.visibility").value(DEFAULT_VISIBILITY.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
             .andExpect(jsonPath("$.likesCount").value(DEFAULT_LIKES_COUNT))
+            .andExpect(jsonPath("$.commentsCount").value(DEFAULT_COMMENTS_COUNT))
             .andExpect(jsonPath("$.sharesCount").value(DEFAULT_SHARES_COUNT))
             .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
             .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()));
@@ -349,6 +356,7 @@ class FeedItemResourceIT {
             .visibility(UPDATED_VISIBILITY)
             .location(UPDATED_LOCATION)
             .likesCount(UPDATED_LIKES_COUNT)
+            .commentsCount(UPDATED_COMMENTS_COUNT)
             .sharesCount(UPDATED_SHARES_COUNT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
@@ -469,9 +477,9 @@ class FeedItemResourceIT {
             .videoUrl(UPDATED_VIDEO_URL)
             .visibility(UPDATED_VISIBILITY)
             .location(UPDATED_LOCATION)
+            .commentsCount(UPDATED_COMMENTS_COUNT)
             .sharesCount(UPDATED_SHARES_COUNT)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT);
+            .createdAt(UPDATED_CREATED_AT);
 
         restFeedItemMockMvc
             .perform(
@@ -508,6 +516,7 @@ class FeedItemResourceIT {
             .visibility(UPDATED_VISIBILITY)
             .location(UPDATED_LOCATION)
             .likesCount(UPDATED_LIKES_COUNT)
+            .commentsCount(UPDATED_COMMENTS_COUNT)
             .sharesCount(UPDATED_SHARES_COUNT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
@@ -645,6 +654,7 @@ class FeedItemResourceIT {
             .andExpect(jsonPath("$.[*].visibility").value(hasItem(DEFAULT_VISIBILITY.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
             .andExpect(jsonPath("$.[*].likesCount").value(hasItem(DEFAULT_LIKES_COUNT)))
+            .andExpect(jsonPath("$.[*].commentsCount").value(hasItem(DEFAULT_COMMENTS_COUNT)))
             .andExpect(jsonPath("$.[*].sharesCount").value(hasItem(DEFAULT_SHARES_COUNT)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
