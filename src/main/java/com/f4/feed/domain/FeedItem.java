@@ -259,17 +259,17 @@ public class FeedItem implements Serializable {
     public String toString() {
         return "FeedItem{" +
             "id=" + getId() +
-            ", userId=" + getUserId() +
+            ", userId='" + getUserId() + "'" +
             ", content='" + getContent() + "'" +
             ", imageUrl='" + getImageUrl() + "'" +
             ", videoUrl='" + getVideoUrl() + "'" +
-            ", visibility=" + getVisibility() +
+            ", visibility='" + getVisibility() + "'" +
             ", location='" + getLocation() + "'" +
             ", likesCount=" + getLikesCount() +
             ", commentsCount=" + getCommentsCount() +
             ", sharesCount=" + getSharesCount() +
-            ", createdAt=" + getCreatedAt() +
-            ", updatedAt=" + getUpdatedAt() +
+            ", createdAt='" + getCreatedAt() + "'" +
+            ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
     }
 }

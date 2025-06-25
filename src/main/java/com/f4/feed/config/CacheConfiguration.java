@@ -24,6 +24,9 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.f4.feed.domain.FeedItem;
+
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.cache.PrefixedKeyGenerator;
 
@@ -86,7 +89,6 @@ public class CacheConfiguration {
         CachingProvider provider = Caching.getCachingProvider("org.redisson.jcache.JCachingProvider");
         CacheManager cacheManager = provider.getCacheManager();
 
-
         return cacheManager;
     }
 
@@ -110,7 +112,7 @@ public class CacheConfiguration {
     public JCacheManagerCustomizer cacheManagerCustomizer(
             javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
-            createCache(cm, com.f4.feed.domain.FeedItem.class.getName(), jcacheConfiguration);
+            createCache(cm, FeedItem.class.getName(), jcacheConfiguration);
             // jhipster-needle-redis-add-entry
         };
     }
