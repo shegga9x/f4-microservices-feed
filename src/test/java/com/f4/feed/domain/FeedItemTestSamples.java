@@ -17,7 +17,6 @@ public class FeedItemTestSamples {
             .videoUrl("videoUrl1")
             .location("location1")
             .likesCount(1)
-            .commentsCount(1)
             .sharesCount(1);
     }
 
@@ -29,7 +28,6 @@ public class FeedItemTestSamples {
             .videoUrl("videoUrl2")
             .location("location2")
             .likesCount(2)
-            .commentsCount(2)
             .sharesCount(2);
     }
 
@@ -41,7 +39,6 @@ public class FeedItemTestSamples {
             .videoUrl(UUID.randomUUID().toString())
             .location(UUID.randomUUID().toString())
             .likesCount(intCount.incrementAndGet())
-            .commentsCount(intCount.incrementAndGet())
             .sharesCount(intCount.incrementAndGet());
     }
 }

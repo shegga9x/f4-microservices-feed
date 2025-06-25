@@ -54,7 +54,6 @@ public class FeedItemAsserts {
             .satisfies(a -> assertThat(a.getVisibility()).as("check visibility").isEqualTo(expected.getVisibility()))
             .satisfies(a -> assertThat(a.getLocation()).as("check location").isEqualTo(expected.getLocation()))
             .satisfies(a -> assertThat(a.getLikesCount()).as("check likesCount").isEqualTo(expected.getLikesCount()))
-            .satisfies(a -> assertThat(a.getCommentsCount()).as("check commentsCount").isEqualTo(expected.getCommentsCount()))
             .satisfies(a -> assertThat(a.getSharesCount()).as("check sharesCount").isEqualTo(expected.getSharesCount()))
             .satisfies(a -> assertThat(a.getCreatedAt()).as("check createdAt").isEqualTo(expected.getCreatedAt()))
             .satisfies(a -> assertThat(a.getUpdatedAt()).as("check updatedAt").isEqualTo(expected.getUpdatedAt()));

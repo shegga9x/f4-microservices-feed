@@ -35,9 +35,6 @@
             <column name="likes_count" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="comments_count" type="integer">
-                <constraints nullable="true" />
-            </column>
             <column name="shares_count" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -77,7 +74,6 @@
             <column name="visibility" type="string"/>
             <column name="location" type="string"/>
             <column name="likes_count" type="numeric"/>
-            <column name="comments_count" type="numeric"/>
             <column name="shares_count" type="numeric"/>
             <column name="created_at" type="date"/>
             <column name="updated_at" type="date"/>

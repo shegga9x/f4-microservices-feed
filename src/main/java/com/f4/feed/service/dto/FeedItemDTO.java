@@ -33,8 +33,6 @@ public class FeedItemDTO implements Serializable {
 
     private Integer likesCount;
 
-    private Integer commentsCount;
-
     private Integer sharesCount;
 
     @NotNull
@@ -107,14 +105,6 @@ public class FeedItemDTO implements Serializable {
         this.likesCount = likesCount;
     }
 
-    public Integer getCommentsCount() {
-        return commentsCount;
-    }
-
-    public void setCommentsCount(Integer commentsCount) {
-        this.commentsCount = commentsCount;
-    }
-
     public Integer getSharesCount() {
         return sharesCount;
     }
@@ -172,7 +162,6 @@ public class FeedItemDTO implements Serializable {
             ", visibility='" + getVisibility() + "'" +
             ", location='" + getLocation() + "'" +
             ", likesCount=" + getLikesCount() +
-            ", commentsCount=" + getCommentsCount() +
             ", sharesCount=" + getSharesCount() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

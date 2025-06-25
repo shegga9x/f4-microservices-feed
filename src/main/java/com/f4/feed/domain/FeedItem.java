@@ -61,10 +61,6 @@ public class FeedItem implements Serializable {
     @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
     private Integer likesCount;
 
-    @Column(name = "comments_count")
-    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
-    private Integer commentsCount;
-
     @Column(name = "shares_count")
     @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
     private Integer sharesCount;
@@ -183,19 +179,6 @@ public class FeedItem implements Serializable {
         this.likesCount = likesCount;
     }
 
-    public Integer getCommentsCount() {
-        return this.commentsCount;
-    }
-
-    public FeedItem commentsCount(Integer commentsCount) {
-        this.setCommentsCount(commentsCount);
-        return this;
-    }
-
-    public void setCommentsCount(Integer commentsCount) {
-        this.commentsCount = commentsCount;
-    }
-
     public Integer getSharesCount() {
         return this.sharesCount;
     }
@@ -266,7 +249,6 @@ public class FeedItem implements Serializable {
             ", visibility='" + getVisibility() + "'" +
             ", location='" + getLocation() + "'" +
             ", likesCount=" + getLikesCount() +
-            ", commentsCount=" + getCommentsCount() +
             ", sharesCount=" + getSharesCount() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
