@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.f4.feed.IntegrationTest;
 import com.f4.feed.domain.FeedItem;
+import com.f4.feed.domain.enumeration.FeedVisibility;
 import com.f4.feed.repository.FeedItemRepository;
 import com.f4.feed.repository.search.FeedItemSearchRepository;
 import com.f4.feed.service.dto.FeedItemDTO;
@@ -46,11 +47,26 @@ class FeedItemResourceIT {
     private static final UUID DEFAULT_USER_ID = UUID.randomUUID();
     private static final UUID UPDATED_USER_ID = UUID.randomUUID();
 
-    private static final UUID DEFAULT_REEL_ID = UUID.randomUUID();
-    private static final UUID UPDATED_REEL_ID = UUID.randomUUID();
+    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
+    private static final String UPDATED_CONTENT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_TIMESTAMP = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_TIMESTAMP = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_IMAGE_URL = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_URL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_VIDEO_URL = "AAAAAAAAAA";
+    private static final String UPDATED_VIDEO_URL = "BBBBBBBBBB";
+
+    private static final FeedVisibility DEFAULT_VISIBILITY = FeedVisibility.PUBLIC;
+    private static final FeedVisibility UPDATED_VISIBILITY = FeedVisibility.PRIVATE;
+
+    private static final String DEFAULT_LOCATION = "AAAAAAAAAA";
+    private static final String UPDATED_LOCATION = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_CREATED_AT = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_UPDATED_AT = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_UPDATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String ENTITY_API_URL = "/api/feed-items";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -85,7 +101,15 @@ class FeedItemResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static FeedItem createEntity() {
-        return new FeedItem().userId(DEFAULT_USER_ID).reelId(DEFAULT_REEL_ID).timestamp(DEFAULT_TIMESTAMP);
+        return new FeedItem()
+            .userId(DEFAULT_USER_ID)
+            .content(DEFAULT_CONTENT)
+            .imageUrl(DEFAULT_IMAGE_URL)
+            .videoUrl(DEFAULT_VIDEO_URL)
+            .visibility(DEFAULT_VISIBILITY)
+            .location(DEFAULT_LOCATION)
+            .createdAt(DEFAULT_CREATED_AT)
+            .updatedAt(DEFAULT_UPDATED_AT);
     }
 
     /**
@@ -95,7 +119,15 @@ class FeedItemResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static FeedItem createUpdatedEntity() {
-        return new FeedItem().userId(UPDATED_USER_ID).reelId(UPDATED_REEL_ID).timestamp(UPDATED_TIMESTAMP);
+        return new FeedItem()
+            .userId(UPDATED_USER_ID)
+            .content(UPDATED_CONTENT)
+            .imageUrl(UPDATED_IMAGE_URL)
+            .videoUrl(UPDATED_VIDEO_URL)
+            .visibility(UPDATED_VISIBILITY)
+            .location(UPDATED_LOCATION)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
     }
 
     @BeforeEach
@@ -190,11 +222,11 @@ class FeedItemResourceIT {
 
     @Test
     @Transactional
-    void checkReelIdIsRequired() throws Exception {
+    void checkCreatedAtIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         int searchDatabaseSizeBefore = IterableUtil.sizeOf(feedItemSearchRepository.findAll());
         // set the field null
-        feedItem.setReelId(null);
+        feedItem.setCreatedAt(null);
 
         // Create the FeedItem, which fails.
         FeedItemDTO feedItemDTO = feedItemMapper.toDto(feedItem);
@@ -211,11 +243,11 @@ class FeedItemResourceIT {
 
     @Test
     @Transactional
-    void checkTimestampIsRequired() throws Exception {
+    void checkUpdatedAtIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         int searchDatabaseSizeBefore = IterableUtil.sizeOf(feedItemSearchRepository.findAll());
         // set the field null
-        feedItem.setTimestamp(null);
+        feedItem.setUpdatedAt(null);
 
         // Create the FeedItem, which fails.
         FeedItemDTO feedItemDTO = feedItemMapper.toDto(feedItem);
@@ -243,8 +275,13 @@ class FeedItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(feedItem.getId().toString())))
             .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
-            .andExpect(jsonPath("$.[*].reelId").value(hasItem(DEFAULT_REEL_ID.toString())))
-            .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)))
+            .andExpect(jsonPath("$.[*].videoUrl").value(hasItem(DEFAULT_VIDEO_URL)))
+            .andExpect(jsonPath("$.[*].visibility").value(hasItem(DEFAULT_VISIBILITY.toString())))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
+            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
     }
 
     @Test
@@ -260,8 +297,13 @@ class FeedItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(feedItem.getId().toString()))
             .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID.toString()))
-            .andExpect(jsonPath("$.reelId").value(DEFAULT_REEL_ID.toString()))
-            .andExpect(jsonPath("$.timestamp").value(DEFAULT_TIMESTAMP.toString()));
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
+            .andExpect(jsonPath("$.imageUrl").value(DEFAULT_IMAGE_URL))
+            .andExpect(jsonPath("$.videoUrl").value(DEFAULT_VIDEO_URL))
+            .andExpect(jsonPath("$.visibility").value(DEFAULT_VISIBILITY.toString()))
+            .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION))
+            .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
+            .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()));
     }
 
     @Test
@@ -285,7 +327,15 @@ class FeedItemResourceIT {
         FeedItem updatedFeedItem = feedItemRepository.findById(feedItem.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedFeedItem are not directly saved in db
         em.detach(updatedFeedItem);
-        updatedFeedItem.userId(UPDATED_USER_ID).reelId(UPDATED_REEL_ID).timestamp(UPDATED_TIMESTAMP);
+        updatedFeedItem
+            .userId(UPDATED_USER_ID)
+            .content(UPDATED_CONTENT)
+            .imageUrl(UPDATED_IMAGE_URL)
+            .videoUrl(UPDATED_VIDEO_URL)
+            .visibility(UPDATED_VISIBILITY)
+            .location(UPDATED_LOCATION)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
         FeedItemDTO feedItemDTO = feedItemMapper.toDto(updatedFeedItem);
 
         restFeedItemMockMvc
@@ -398,7 +448,12 @@ class FeedItemResourceIT {
         FeedItem partialUpdatedFeedItem = new FeedItem();
         partialUpdatedFeedItem.setId(feedItem.getId());
 
-        partialUpdatedFeedItem.userId(UPDATED_USER_ID);
+        partialUpdatedFeedItem
+            .userId(UPDATED_USER_ID)
+            .videoUrl(UPDATED_VIDEO_URL)
+            .visibility(UPDATED_VISIBILITY)
+            .location(UPDATED_LOCATION)
+            .updatedAt(UPDATED_UPDATED_AT);
 
         restFeedItemMockMvc
             .perform(
@@ -427,7 +482,15 @@ class FeedItemResourceIT {
         FeedItem partialUpdatedFeedItem = new FeedItem();
         partialUpdatedFeedItem.setId(feedItem.getId());
 
-        partialUpdatedFeedItem.userId(UPDATED_USER_ID).reelId(UPDATED_REEL_ID).timestamp(UPDATED_TIMESTAMP);
+        partialUpdatedFeedItem
+            .userId(UPDATED_USER_ID)
+            .content(UPDATED_CONTENT)
+            .imageUrl(UPDATED_IMAGE_URL)
+            .videoUrl(UPDATED_VIDEO_URL)
+            .visibility(UPDATED_VISIBILITY)
+            .location(UPDATED_LOCATION)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
 
         restFeedItemMockMvc
             .perform(
@@ -556,8 +619,13 @@ class FeedItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(feedItem.getId().toString())))
             .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID.toString())))
-            .andExpect(jsonPath("$.[*].reelId").value(hasItem(DEFAULT_REEL_ID.toString())))
-            .andExpect(jsonPath("$.[*].timestamp").value(hasItem(DEFAULT_TIMESTAMP.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].imageUrl").value(hasItem(DEFAULT_IMAGE_URL)))
+            .andExpect(jsonPath("$.[*].videoUrl").value(hasItem(DEFAULT_VIDEO_URL)))
+            .andExpect(jsonPath("$.[*].visibility").value(hasItem(DEFAULT_VISIBILITY.toString())))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION)))
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
+            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
     }
 
     protected long getRepositoryCount() {

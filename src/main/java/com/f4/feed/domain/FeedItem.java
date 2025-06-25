@@ -1,5 +1,6 @@
 package com.f4.feed.domain;
 
+import com.f4.feed.domain.enumeration.FeedVisibility;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -9,15 +10,14 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-/**
- * A FeedItem.
- */
 @Entity
 @Table(name = "feed_item")
-// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@org.springframework.data.elasticsearch.annotations.Document(indexName = "feeditem")
-@SuppressWarnings("common-java:DuplicatedBlocks")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Document(indexName = "feeditem")
 public class FeedItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,24 +34,40 @@ public class FeedItem implements Serializable {
     @Column(name = "user_id", length = 36, nullable = false)
     private UUID userId;
 
-    @NotNull
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    @Column(name = "reel_id", length = 36, nullable = false)
-    private UUID reelId;
+    @Lob
+    @Column(name = "content")
+    @Field(type = FieldType.Text)
+    private String content;
+
+    @Column(name = "image_url")
+    @Field(type = FieldType.Text)
+    private String imageUrl;
+
+    @Column(name = "video_url")
+    @Field(type = FieldType.Text)
+    private String videoUrl;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "visibility")
+    @Field(type = FieldType.Keyword)
+    private FeedVisibility visibility;
+
+    @Column(name = "location")
+    @Field(type = FieldType.Text)
+    private String location;
 
     @NotNull
-    @Column(name = "timestamp", nullable = false)
-    private Instant timestamp;
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
+    @NotNull
+    @Column(name = "updated_at", nullable = false)
+    private Instant updatedAt;
+
+    // Getters and Setters
 
     public UUID getId() {
-        return this.id;
-    }
-
-    public FeedItem id(UUID id) {
-        this.setId(id);
-        return this;
+        return id;
     }
 
     public void setId(UUID id) {
@@ -59,71 +75,96 @@ public class FeedItem implements Serializable {
     }
 
     public UUID getUserId() {
-        return this.userId;
-    }
-
-    public FeedItem userId(UUID userId) {
-        this.setUserId(userId);
-        return this;
+        return userId;
     }
 
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
-    public UUID getReelId() {
-        return this.reelId;
+    public String getContent() {
+        return content;
     }
 
-    public FeedItem reelId(UUID reelId) {
-        this.setReelId(reelId);
-        return this;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setReelId(UUID reelId) {
-        this.reelId = reelId;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public Instant getTimestamp() {
-        return this.timestamp;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public FeedItem timestamp(Instant timestamp) {
-        this.setTimestamp(timestamp);
-        return this;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    public FeedVisibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(FeedVisibility visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
+        if (this == o)
             return true;
-        }
-        if (!(o instanceof FeedItem)) {
+        if (!(o instanceof FeedItem))
             return false;
-        }
-        return getId() != null && getId().equals(((FeedItem) o).getId());
+        return id != null && id.equals(((FeedItem) o).id);
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "FeedItem{" +
-            "id=" + getId() +
-            ", userId='" + getUserId() + "'" +
-            ", reelId='" + getReelId() + "'" +
-            ", timestamp='" + getTimestamp() + "'" +
-            "}";
+                "id=" + id +
+                ", userId=" + userId +
+                ", content='" + content + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", visibility=" + visibility +
+                ", location='" + location + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
+
 }

@@ -48,8 +48,13 @@ public class FeedItemAsserts {
         assertThat(actual)
             .as("Verify FeedItem relevant properties")
             .satisfies(a -> assertThat(a.getUserId()).as("check userId").isEqualTo(expected.getUserId()))
-            .satisfies(a -> assertThat(a.getReelId()).as("check reelId").isEqualTo(expected.getReelId()))
-            .satisfies(a -> assertThat(a.getTimestamp()).as("check timestamp").isEqualTo(expected.getTimestamp()));
+            .satisfies(a -> assertThat(a.getContent()).as("check content").isEqualTo(expected.getContent()))
+            .satisfies(a -> assertThat(a.getImageUrl()).as("check imageUrl").isEqualTo(expected.getImageUrl()))
+            .satisfies(a -> assertThat(a.getVideoUrl()).as("check videoUrl").isEqualTo(expected.getVideoUrl()))
+            .satisfies(a -> assertThat(a.getVisibility()).as("check visibility").isEqualTo(expected.getVisibility()))
+            .satisfies(a -> assertThat(a.getLocation()).as("check location").isEqualTo(expected.getLocation()))
+            .satisfies(a -> assertThat(a.getCreatedAt()).as("check createdAt").isEqualTo(expected.getCreatedAt()))
+            .satisfies(a -> assertThat(a.getUpdatedAt()).as("check updatedAt").isEqualTo(expected.getUpdatedAt()));
     }
 
     /**

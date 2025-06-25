@@ -2,7 +2,7 @@
   "annotations": {
     "changelogDate": "20250422052415"
   },
-  "applications": ["ms_feed"],
+  "applications": ["gateway", "ms_feed"],
   "clientRootFolder": "ms_feed",
   "databaseType": "sql",
   "dto": "mapstruct",
@@ -18,12 +18,33 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "reelId",
-      "fieldType": "UUID",
+      "fieldName": "content",
+      "fieldType": "TextBlob"
+    },
+    {
+      "fieldName": "imageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "visibility",
+      "fieldType": "FeedVisibility",
+      "fieldValues": "PUBLIC,PRIVATE,FRIENDS_ONLY"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "timestamp",
+      "fieldName": "updatedAt",
       "fieldType": "Instant",
       "fieldValidateRules": ["required"]
     }

@@ -65,9 +65,13 @@
         INSERT INTO feed_item (id, user_id, reel_id, timestamp)
         SELECT
             r.feed_id,
-            (SELECT user_id FROM indexed_users u WHERE u.rn = ((r.rn - 1) % @total_users) + 1),
-            UUID(),           -- generate random reel_id (or use fixed/test one)
-            DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 60 * 24 * 30) MINUTE) AS timestamp
+            'No content available' AS content,
+            '' AS image_url,
+            '' AS video_url,
+            'PUBLIC' AS visibility,
+            '' AS location,
+            DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 60 * 24 * 30) MINUTE) AS created_at,
+            NOW() AS updated_at
         FROM indexed_feeds r
         LIMIT 500000;
         </sql>

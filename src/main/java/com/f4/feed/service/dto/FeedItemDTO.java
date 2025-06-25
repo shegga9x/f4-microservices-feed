@@ -1,5 +1,7 @@
 package com.f4.feed.service.dto;
 
+import com.f4.feed.domain.enumeration.FeedVisibility;
+import jakarta.persistence.Lob;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -18,11 +20,22 @@ public class FeedItemDTO implements Serializable {
     @NotNull
     private UUID userId;
 
-    @NotNull
-    private UUID reelId;
+    @Lob
+    private String content;
+
+    private String imageUrl;
+
+    private String videoUrl;
+
+    private FeedVisibility visibility;
+
+    private String location;
 
     @NotNull
-    private Instant timestamp;
+    private Instant createdAt;
+
+    @NotNull
+    private Instant updatedAt;
 
     public UUID getId() {
         return id;
@@ -40,20 +53,60 @@ public class FeedItemDTO implements Serializable {
         this.userId = userId;
     }
 
-    public UUID getReelId() {
-        return reelId;
+    public String getContent() {
+        return content;
     }
 
-    public void setReelId(UUID reelId) {
-        this.reelId = reelId;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public Instant getTimestamp() {
-        return timestamp;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public FeedVisibility getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(FeedVisibility visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -83,8 +136,13 @@ public class FeedItemDTO implements Serializable {
         return "FeedItemDTO{" +
             "id='" + getId() + "'" +
             ", userId='" + getUserId() + "'" +
-            ", reelId='" + getReelId() + "'" +
-            ", timestamp='" + getTimestamp() + "'" +
+            ", content='" + getContent() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
+            ", videoUrl='" + getVideoUrl() + "'" +
+            ", visibility='" + getVisibility() + "'" +
+            ", location='" + getLocation() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
+            ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
     }
 }
