@@ -1,6 +1,8 @@
 package com.f4.feed.service;
 
 import com.f4.feed.service.dto.FeedItemDTO;
+import com.f4.feed.service.dto.FeedWithOtherDTO;
+
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.domain.Page;
@@ -60,10 +62,21 @@ public interface FeedItemService {
     /**
      * Search for the feedItem corresponding to the query.
      *
-     * @param query the query of the search.
+     * @param query    the query of the search.
      *
      * @param pageable the pagination information.
      * @return the list of entities.
      */
     Page<FeedItemDTO> search(String query, Pageable pageable);
+
+    /**
+     * Search for the feedItem corresponding to the query.
+     *
+     * @param query    the query of the search.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<FeedWithOtherDTO> findFeedWithOther(String query, Pageable pageable);
+
 }

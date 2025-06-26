@@ -64,8 +64,7 @@
         -- Insert feeds with round-robin assigned users
         INSERT INTO feed_item (
             id, user_id, content, image_url, video_url,
-            visibility, location, likes_count, comments_count,
-            shares_count, created_at, updated_at
+            visibility, location, created_at, updated_at
         )
         SELECT
             f.feed_id,
@@ -75,9 +74,6 @@
             '' AS video_url,
             'PUBLIC' AS visibility,
             '' AS location,
-            FLOOR(RAND() * 100) AS likes_count,
-            FLOOR(RAND() * 50) AS comments_count,
-            FLOOR(RAND() * 20) AS shares_count,
             DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 60 * 24 * 30) MINUTE) AS created_at,
             NOW() AS updated_at
         FROM indexed_feeds f
