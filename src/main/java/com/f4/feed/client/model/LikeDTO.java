@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   LikeDTO.JSON_PROPERTY_USER_ID,
   LikeDTO.JSON_PROPERTY_CREATED_AT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-06-26T07:34:31.980696460+07:00[Asia/Ho_Chi_Minh]", comments = "Generator version: 7.13.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-06-26T10:46:36.107672237+07:00[Asia/Ho_Chi_Minh]", comments = "Generator version: 7.13.0")
 public class LikeDTO {
   public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nonnull

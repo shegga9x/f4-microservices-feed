@@ -31,12 +31,6 @@ public class FeedItemDTO implements Serializable {
 
     private String location;
 
-    private Integer likesCount;
-
-    private Integer commentsCount;
-
-    private Integer sharesCount;
-
     @NotNull
     private Instant createdAt;
 
@@ -99,30 +93,6 @@ public class FeedItemDTO implements Serializable {
         this.location = location;
     }
 
-    public Integer getLikesCount() {
-        return likesCount;
-    }
-
-    public void setLikesCount(Integer likesCount) {
-        this.likesCount = likesCount;
-    }
-
-    public Integer getCommentsCount() {
-        return commentsCount;
-    }
-
-    public void setCommentsCount(Integer commentsCount) {
-        this.commentsCount = commentsCount;
-    }
-
-    public Integer getSharesCount() {
-        return sharesCount;
-    }
-
-    public void setSharesCount(Integer sharesCount) {
-        this.sharesCount = sharesCount;
-    }
-
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -171,9 +141,6 @@ public class FeedItemDTO implements Serializable {
             ", videoUrl='" + getVideoUrl() + "'" +
             ", visibility='" + getVisibility() + "'" +
             ", location='" + getLocation() + "'" +
-            ", likesCount=" + getLikesCount() +
-            ", commentsCount=" + getCommentsCount() +
-            ", sharesCount=" + getSharesCount() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
             "}";

@@ -57,18 +57,6 @@ public class FeedItem implements Serializable {
     @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Text)
     private String location;
 
-    @Column(name = "likes_count")
-    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
-    private Integer likesCount;
-
-    @Column(name = "comments_count")
-    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
-    private Integer commentsCount;
-
-    @Column(name = "shares_count")
-    @org.springframework.data.elasticsearch.annotations.Field(type = org.springframework.data.elasticsearch.annotations.FieldType.Integer)
-    private Integer sharesCount;
-
     @NotNull
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
@@ -170,45 +158,6 @@ public class FeedItem implements Serializable {
         this.location = location;
     }
 
-    public Integer getLikesCount() {
-        return this.likesCount;
-    }
-
-    public FeedItem likesCount(Integer likesCount) {
-        this.setLikesCount(likesCount);
-        return this;
-    }
-
-    public void setLikesCount(Integer likesCount) {
-        this.likesCount = likesCount;
-    }
-
-    public Integer getCommentsCount() {
-        return this.commentsCount;
-    }
-
-    public FeedItem commentsCount(Integer commentsCount) {
-        this.setCommentsCount(commentsCount);
-        return this;
-    }
-
-    public void setCommentsCount(Integer commentsCount) {
-        this.commentsCount = commentsCount;
-    }
-
-    public Integer getSharesCount() {
-        return this.sharesCount;
-    }
-
-    public FeedItem sharesCount(Integer sharesCount) {
-        this.setSharesCount(sharesCount);
-        return this;
-    }
-
-    public void setSharesCount(Integer sharesCount) {
-        this.sharesCount = sharesCount;
-    }
-
     public Instant getCreatedAt() {
         return this.createdAt;
     }
@@ -265,9 +214,6 @@ public class FeedItem implements Serializable {
             ", videoUrl='" + getVideoUrl() + "'" +
             ", visibility='" + getVisibility() + "'" +
             ", location='" + getLocation() + "'" +
-            ", likesCount=" + getLikesCount() +
-            ", commentsCount=" + getCommentsCount() +
-            ", sharesCount=" + getSharesCount() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
