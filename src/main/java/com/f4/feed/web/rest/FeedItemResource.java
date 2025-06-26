@@ -3,6 +3,7 @@ package com.f4.feed.web.rest;
 import com.f4.feed.repository.FeedItemRepository;
 import com.f4.feed.service.FeedItemService;
 import com.f4.feed.service.dto.FeedItemDTO;
+import com.f4.feed.service.dto.FeedWithOtherDTO;
 import com.f4.feed.web.rest.errors.BadRequestAlertException;
 import com.f4.feed.web.rest.errors.ElasticsearchExceptionMapper;
 import jakarta.validation.Valid;
@@ -195,6 +196,29 @@ public class FeedItemResource {
         LOG.debug("REST request to search for a page of FeedItems for query {}", query);
         try {
             Page<FeedItemDTO> page = feedItemService.search(query, pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+            return ResponseEntity.ok().headers(headers).body(page.getContent());
+        } catch (RuntimeException e) {
+            throw ElasticsearchExceptionMapper.mapException(e);
+        }
+    }
+
+    /**
+     * {@code GET  /feed-items/_search-with-other?query=:query} : search for feed items with other data
+     * corresponding to the query.
+     *
+     * @param query the query of the feed search.
+     * @param pageable the pagination information.
+     * @return the result of the search with other data.
+     */
+    @GetMapping("/search-for-main-page")
+    public ResponseEntity<List<FeedWithOtherDTO>> findFeedWithOther(
+        @RequestParam("query") String query,
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable
+    ) {
+        LOG.debug("REST request to search for feed items with other data for query {}", query);
+        try {
+            Page<FeedWithOtherDTO> page = feedItemService.findFeedWithOther(query, pageable);
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
             return ResponseEntity.ok().headers(headers).body(page.getContent());
         } catch (RuntimeException e) {
