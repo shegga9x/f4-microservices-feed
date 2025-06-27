@@ -3,6 +3,7 @@ package com.f4.feed.service.impl;
 import com.f4.feed.client.api.CommentResourceApi;
 import com.f4.feed.client.api.LikeResourceApi;
 import com.f4.feed.client.api.UserResourceApi;
+import com.f4.feed.client.model.RedisUserDTO;
 import com.f4.feed.client.model.UserDTO;
 import com.f4.feed.domain.FeedItem;
 import com.f4.feed.repository.FeedItemRepository;
@@ -153,10 +154,9 @@ public class FeedItemServiceImpl implements FeedItemService {
             feedWithOtherDTO.setFeedItem(feedItemDTO);
 
             // Use injected userResourceApi
-            UserDTO userDTO = userResourceApi.getUser(feedItemDTO.getUserId());
+            RedisUserDTO userDTO = userResourceApi.getUserFromRedis(feedItemDTO.getUserId());
             if (userDTO != null) {
-                feedWithOtherDTO.setUserAvatar(userDTO.getUserAvatar());
-                feedWithOtherDTO.setUserName(userDTO.getUsername());
+                feedWithOtherDTO.setRedisUserDTO(userDTO);
             }
 
             try {

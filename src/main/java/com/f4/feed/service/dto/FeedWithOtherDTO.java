@@ -1,9 +1,10 @@
 package com.f4.feed.service.dto;
 
+import com.f4.feed.client.model.RedisUserDTO;
+
 public class FeedWithOtherDTO {
     private FeedItemDTO feedItem;;
-    private String userName;
-    private String userAvatar;
+    private RedisUserDTO redisUserDTO;
     private Long likeCount;
     private Long commentCount;
     private Long shareCount;
@@ -16,20 +17,12 @@ public class FeedWithOtherDTO {
         this.feedItem = feedItem;
     }
 
-    public String getUserName() {
-        return userName;
+    public RedisUserDTO getRedisUserDTO() {
+        return redisUserDTO;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserAvatar() {
-        return userAvatar;
-    }
-
-    public void setUserAvatar(String userAvatar) {
-        this.userAvatar = userAvatar;
+    public void setRedisUserDTO(RedisUserDTO redisUserDTO) {
+        this.redisUserDTO = redisUserDTO;
     }
 
     public Long getLikeCount() {
@@ -54,12 +47,6 @@ public class FeedWithOtherDTO {
 
     public void setShareCount(Long shareCount) {
         this.shareCount = shareCount;
-    }
-
-    @Override
-    public String toString() {
-        return "FeedWithOtherDTO [feedItem=" + feedItem + ", userName=" + userName + ", userAvatar=" + userAvatar
-                + ", likeCount=" + likeCount + ", commentCount=" + commentCount + ", shareCount=" + shareCount + "]";
     }
 
 }
