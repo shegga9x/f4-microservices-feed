@@ -131,10 +131,48 @@ public class FeedItemServiceImpl implements FeedItemService {
             Page<FeedItemDTO> feedItemPage = findAll(pageable);
             List<FeedItemDTO> feedItems = feedItemPage.getContent();
 
-            // Transform each feed item to FeedWithOtherDTO
-            List<FeedWithOtherDTO> feedWithOtherList = feedItems.stream()
-                    .map(this::enrichFeedItemWithOtherData)
+            // Collect all feed item IDs for batch processing
+            List<UUID> feedItemIds = feedItems.stream()
+                    .map(FeedItemDTO::getId)
                     .collect(Collectors.toList());
+
+            // Get comment counts for all feed items in one batch call
+            List<Integer> commentCounts = null;
+            try {
+                if (!feedItemIds.isEmpty()) {
+                    commentCounts = commentResourceApi.countCommentsParentIdsAndParentType(feedItemIds, "feed");
+                }
+            } catch (Exception e) {
+                LOG.warn("Failed to get comment counts for feed items: {}", e.getMessage());
+            }
+
+            // Get like counts for all feed items in one batch call
+            List<Integer> likeCounts = null;
+            try {
+                if (!feedItemIds.isEmpty()) {
+                    likeCounts = likeResourceApi.countLikesParentIdsAndParentType(feedItemIds, "feed");
+                }
+            } catch (Exception e) {
+                LOG.warn("Failed to get like counts for feed items: {}", e.getMessage());
+            }
+
+            // Transform each feed item to FeedWithOtherDTO
+            List<FeedWithOtherDTO> feedWithOtherList = new ArrayList<>();
+            for (int i = 0; i < feedItems.size(); i++) {
+                FeedItemDTO feedItem = feedItems.get(i);
+                Long commentCount = 0L;
+                Long likeCount = 0L;
+
+                if (commentCounts != null && i < commentCounts.size()) {
+                    commentCount = commentCounts.get(i).longValue();
+                }
+
+                if (likeCounts != null && i < likeCounts.size()) {
+                    likeCount = likeCounts.get(i).longValue();
+                }
+
+                feedWithOtherList.add(enrichFeedItemWithOtherData(feedItem, commentCount, likeCount));
+            }
 
             // Return as Page
             return new PageImpl<>(
@@ -147,43 +185,31 @@ public class FeedItemServiceImpl implements FeedItemService {
         }
     }
 
-    private FeedWithOtherDTO enrichFeedItemWithOtherData(FeedItemDTO feedItemDTO) {
+    private FeedWithOtherDTO enrichFeedItemWithOtherData(FeedItemDTO feedItemDTO, Long commentCount, Long likeCount) {
         FeedWithOtherDTO feedWithOtherDTO = new FeedWithOtherDTO();
 
         try {
             feedWithOtherDTO.setFeedItem(feedItemDTO);
 
             // Use injected userResourceApi
-            RedisUserDTO userDTO = userResourceApi.getUserFromRedis(feedItemDTO.getUserId());
-            if (userDTO != null) {
-                feedWithOtherDTO.setRedisUserDTO(userDTO);
-            }
-
             try {
-                Long commentCount = commentResourceApi.countByParentIdAndParentType1(feedItemDTO.getId(), "feed");
-                feedWithOtherDTO.setCommentCount(commentCount != null ? commentCount : 0);
+                RedisUserDTO userDTO = userResourceApi.getUserFromRedis(feedItemDTO.getUserId());
+                if (userDTO != null) {
+                    feedWithOtherDTO.setRedisUserDTO(userDTO);
+                }
             } catch (Exception e) {
-                LOG.warn("Failed to get comment count for feed item {}: {}", feedItemDTO.getId(), e.getMessage());
-                feedWithOtherDTO.setCommentCount(0L);
+                LOG.warn("Failed to get user from Redis for feed item {}: {}", feedItemDTO.getId(), e.getMessage());
+                feedWithOtherDTO.setRedisUserDTO(null);
             }
-
-            try {
-                Long likeCount = likeResourceApi.countByParentIdAndParentType(feedItemDTO.getId(), "feed");
-                feedWithOtherDTO.setLikeCount(likeCount != null ? likeCount : 0);
-            } catch (Exception e) {
-                LOG.warn("Failed to get like count for feed item {}: {}", feedItemDTO.getId(), e.getMessage());
-                feedWithOtherDTO.setLikeCount(0L);
-            }
-
-            feedWithOtherDTO.setShareCount(0L); // Placeholder
 
         } catch (Exception e) {
             LOG.error("Error enriching feed item {} with other data: {}", feedItemDTO.getId(), e.getMessage());
-            feedWithOtherDTO.setFeedItem(feedItemDTO);
-            feedWithOtherDTO.setCommentCount(0L);
-            feedWithOtherDTO.setLikeCount(0L);
-            feedWithOtherDTO.setShareCount(0L);
+
         }
+        feedWithOtherDTO.setCommentCount(commentCount);
+        feedWithOtherDTO.setLikeCount(likeCount);
+        feedWithOtherDTO.setShareCount(0L);
+        feedWithOtherDTO.setFeedItem(feedItemDTO);
 
         return feedWithOtherDTO;
     }
