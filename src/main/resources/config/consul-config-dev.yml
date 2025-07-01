@@ -10,7 +10,6 @@ ssh:
   remote:
     host: appf4.io.vn
   user: root
-  password: ledinhde788De
   service-name: feed
   mysql_database: feed
   redis_password: Hiendepzaikhoaitonhatxom
